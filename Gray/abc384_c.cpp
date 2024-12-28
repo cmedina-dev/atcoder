@@ -14,7 +14,6 @@ int main() {
     const vector set = {"A", "B", "C", "D", "E"};
     map<char, int> score_map;
     vector<pair<string, int>> scores;
-    vector<string> participants;
     score_map['A'] = a;
     score_map['B'] = b;
     score_map['C'] = c;
