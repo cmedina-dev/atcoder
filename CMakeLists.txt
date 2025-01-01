@@ -15,4 +15,38 @@ foreach(SOURCE ${GRAY_SOURCES})
     add_executable(${EXECUTABLE_NAME} ${SOURCE})
 
     set_target_properties(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+    if(MSVC)
+        target_compile_options(${EXECUTABLE_NAME} PRIVATE /W4 /WX)
+    else()
+        target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+endforeach()
+
+foreach(SOURCE ${BROWN_SOURCES})
+    get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
+
+    add_executable(${EXECUTABLE_NAME} ${SOURCE})
+
+    set_target_properties(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+    if(MSVC)
+        target_compile_options(${EXECUTABLE_NAME} PRIVATE /W4 /WX)
+    else()
+        target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+endforeach()
+
+foreach(SOURCE ${CYAN_SOURCES})
+    get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
+
+    add_executable(${EXECUTABLE_NAME} ${SOURCE})
+
+    set_target_properties(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+    if(MSVC)
+        target_compile_options(${EXECUTABLE_NAME} PRIVATE /W4 /WX)
+    else()
+        target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
 endforeach()
