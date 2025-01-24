@@ -5,48 +5,26 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-file(GLOB GRAY_SOURCES "Gray/*.cpp")
-file(GLOB BROWN_SOURCES "Brown/*.cpp")
-file(GLOB CYAN_SOURCES "Cyan/*.cpp")
+set(SOURCE_DIRECTORIES
+        Gray
+        Brown
+        Cyan
+)
 
-foreach(SOURCE ${GRAY_SOURCES})
-    get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
+foreach(DIR ${SOURCE_DIRECTORIES})
+    file(GLOB SOURCES "${DIR}/*.cpp")
 
-    add_executable(${EXECUTABLE_NAME} ${SOURCE})
+    foreach(SOURCE ${SOURCES})
+        get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
 
-    set_target_properties(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+        add_executable(${EXECUTABLE_NAME} ${SOURCE})
 
-    if(MSVC)
-        target_compile_options(${EXECUTABLE_NAME} PRIVATE /W4 /WX)
-    else()
-        target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
-    endif()
-endforeach()
+        set_target_properties(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-foreach(SOURCE ${BROWN_SOURCES})
-    get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
-
-    add_executable(${EXECUTABLE_NAME} ${SOURCE})
-
-    set_target_properties(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
-    if(MSVC)
-        target_compile_options(${EXECUTABLE_NAME} PRIVATE /W4 /WX)
-    else()
-        target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
-    endif()
-endforeach()
-
-foreach(SOURCE ${CYAN_SOURCES})
-    get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
-
-    add_executable(${EXECUTABLE_NAME} ${SOURCE})
-
-    set_target_properties(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
-    if(MSVC)
-        target_compile_options(${EXECUTABLE_NAME} PRIVATE /W4 /WX)
-    else()
-        target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
-    endif()
+        if(MSVC)
+            target_compile_options(${EXECUTABLE_NAME} PRIVATE /W4 /WX)
+        else()
+            target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+        endif()
+    endforeach()
 endforeach()
